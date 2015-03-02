@@ -15,9 +15,8 @@ COPY files/server.json /etc/sensu/server.json
 ADD files/conf.d /etc/sensu/conf.d/
 ADD files/handlers /etc/sensu/handlers
 ADD files/extensions /etc/sensu/extensions
-ADD files/extensions /etc/sensu/extensions
+ADD files/mutators /etc/sensu/mutators
 ADD files/plugins /etc/sensu/plugins
-
 
 # SSL sensu-server settings
 ADD files/ssl /etc/sensu/ssl
