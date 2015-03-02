@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Exequiel Pierotto <epierotto@abast.es>
+MAINTAINER Exequiel Pierotto <exequiel.pierotto@gmail.com>
 
 # Install sensu
 RUN \
@@ -12,14 +12,20 @@ RUN \
 
 # Add the sensu-server config files
 COPY files/server.json /etc/sensu/server.json
+ADD files/conf.d /etc/sensu/conf.d/
+ADD files/handlers /etc/sensu/handlers
+ADD files/extensions /etc/sensu/extensions
+ADD files/extensions /etc/sensu/extensions
+ADD files/plugins /etc/sensu/plugins
+
 
 # SSL sensu-server settings
-COPY files/ssl/cert.pem /etc/sensu/ssl/cert.pem
-COPY files/ssl/key.pem /etc/sensu/ssl/key.pem
+ADD files/ssl /etc/sensu/ssl
+
 
 RUN chgrp -R sensu /etc/sensu
 
 # Sync with a local directory or a data volume container
 #VOLUME /etc/sensu
 
-CMD /opt/sensu/bin/sensu-server -c /etc/sensu/server.json
+CMD /opt/sensu/bin/sensu-server -d /etc/sensu/
